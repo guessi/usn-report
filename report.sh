@@ -10,10 +10,10 @@ echo "==> generate report"
 echo "==> beautify report"
 python -m BeautifulSoup < report/temp.html > report/$(date +%Y%m%d).html
 
-echo "==> sending report"
-./usn-report-sendmail.py
-
 echo "==> remove temporary files"
 rm -f report/temp.html
+
+echo "==> sending report"
+./usn-report-sendmail.py
 
 echo "==> done"
