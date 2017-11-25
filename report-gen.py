@@ -3,6 +3,8 @@
 from datetime import datetime as dt
 from lxml import etree, html
 
+from bs4 import BeautifulSoup
+
 import feedparser
 import re
 
@@ -37,7 +39,7 @@ def getContent(rss, year, month, date, prev_date):
 
 
 def getSectionHeader():
-    return "<h3>Ubuntu Security Notices (AutoGen Report)</h3>"
+    return "<h3>Ubuntu Security Notices Report (AutoGen)</h3>"
 
 
 rss = feedparser.parse('https://www.ubuntu.com/usn/rss.xml')
@@ -58,6 +60,10 @@ for index in xrange(100):
     prev_date, content = getContent(rss, year, month, date, prev_date)
     body += content
 
+html_doc = etree.tostring(
+               html.fromstring(body),
+               encoding='unicode',
+               pretty_print=True)
 
-print(etree.tostring(html.fromstring(body),
-      encoding='unicode', pretty_print=True))
+soup = BeautifulSoup(html_doc, 'html.parser')
+print(soup.prettify())

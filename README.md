@@ -3,20 +3,34 @@
 Get latest security report from upstream [Ubuntu Security Notices](https://www.ubuntu.com/usn/)
 
 
-### Prerequisites
-
-    $ pip install -r requirements.txt
-
-
 ### Usage
 
-Modifiy the following parameters in script
+Generate Report
 
-    $ vim config.py
+    $ ./report-gen.py > report.html
 
-    $ ./report.sh
+Send Report
+
+    $ export SMTP_SERVER='msa.hinet.net'
+    $ export RECIPIENT='kuole_mei@trend.com.tw'
+    $ ./report-send.py
 
 
-### Sample Output
+### Dockerized as Tool
 
-See report/*.html
+    $ docker run -it guessi/usn-report         \
+        /opt/report-gen.py > report.html
+
+    $ docker run                               \
+        -v $(pwd)/report.html:/opt/report.html \
+        -it guessi/usn-report                  \
+        /opt/report-send.py
+
+OR
+
+    $ docker run                               \
+        -e SMTP_SERVER=msa.hinet.net           \
+        -e RECIPIENT=guessi@gmail.com          \
+        -v $(pwd)/report.html:/opt/report.html \
+        -it guessi/usn-report                  \
+        /opt/report-send.py
