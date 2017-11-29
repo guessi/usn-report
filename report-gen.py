@@ -49,7 +49,7 @@ prev_date = ""
 
 body = getSectionHeader()
 
-for index in xrange(100):
+for index in xrange(50):
     year, month, date = getDateString(rss, index)
     usn_date = dt.strptime(
         "{0}-{1}-{2}".format(year, month, date), '%Y-%m-%d').date()
