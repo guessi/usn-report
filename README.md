@@ -22,15 +22,12 @@ Send Report
 
 ### Dockerized as Tool
 
+Generate report File
+
     $ docker run -it guessi/usn-report         \
         /opt/report-gen.py > report.html
 
-    $ docker run                               \
-        -v $(pwd)/report.html:/opt/report.html \
-        -it guessi/usn-report                  \
-        /opt/report-send.py
-
-OR
+Send out report
 
     $ docker run                               \
         -e SMTP_SERVER=msa.hinet.net           \
