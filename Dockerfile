@@ -1,5 +1,4 @@
 FROM python:2.7-slim
-ADD requirements.txt /opt/
-RUN pip install -r /opt/requirements.txt
+RUN pip install beautifulsoup4 feedparser lxml
 ADD *.py /opt/
 WORKDIR /opt/
