@@ -1,24 +1,20 @@
 #!/usr/bin/env python
 
-from datetime import datetime as dt
-from lxml import etree, html
-
 from bs4 import BeautifulSoup
-
-import feedparser
-import re
+from datetime import datetime as dt
+from feedparser import parse as rss_parser
+from lxml import etree, html
 
 month_dict = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
               "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
 def getDateString(rss, index):
-    entry = rss.entries[index].summary_detail.value
-    date_raw = re.search("<em>(.+?)</em>", entry).group(1)
+    date_raw = rss.entries[index].published
 
-    year = date_raw.split(',')[1].strip()
-    month = date_raw.split(',')[0].split(' ')[1][:3]
-    date = date_raw.split(',')[0].split(' ')[0][:-2]
+    year = date_raw.split(' ')[3]
+    month = date_raw.split(' ')[2]
+    date = date_raw.split(' ')[1]
 
     return (year, month_dict.index(month) + 1, date)
 
@@ -42,14 +38,14 @@ def getSectionHeader():
     return "<h3>Ubuntu Security Notices Report (AutoGen)</h3>"
 
 
-rss = feedparser.parse('https://www.ubuntu.com/usn/rss.xml')
+rss = rss_parser('https://usn.ubuntu.com/rss.xml')
 today = dt.now().date()
 desire_days = 30
 prev_date = ""
 
 body = getSectionHeader()
 
-for index in xrange(50):
+for index in xrange(min(len(rss.entries), 50)):
     year, month, date = getDateString(rss, index)
     usn_date = dt.strptime(
         "{0}-{1}-{2}".format(year, month, date), '%Y-%m-%d').date()
