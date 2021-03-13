@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from bs4 import BeautifulSoup
 from datetime import datetime as dt
@@ -38,14 +38,14 @@ def getSectionHeader():
     return "<h3>Ubuntu Security Notices Report (AutoGen)</h3>"
 
 
-rss = rss_parser('https://usn.ubuntu.com/rss.xml')
+rss = rss_parser('https://ubuntu.com/security/notices/rss.xml')
 today = dt.now().date()
 desire_days = 30
 prev_date = ""
 
 body = getSectionHeader()
 
-for index in xrange(min(len(rss.entries), 50)):
+for index in range(min(len(rss.entries), 50)):
     year, month, date = getDateString(rss, index)
     usn_date = dt.strptime(
         "{0}-{1}-{2}".format(year, month, date), '%Y-%m-%d').date()

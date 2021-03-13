@@ -1,4 +1,5 @@
-FROM python:2.7-slim
-RUN pip install beautifulsoup4 feedparser lxml
-ADD *.py /opt/
+FROM python:3.9-slim
+COPY requirements.txt /tmp/
+RUN pip install -r /tmp/requirements.txt
+ADD report-gen.py report-send.py /opt/
 WORKDIR /opt/

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os.path
 
@@ -15,7 +15,7 @@ def get_report(subject, sender, recipient):
 
     # read report from file
     fp = open('report.html', 'rb')
-    msg = MIMEText(fp.read(), 'html')
+    msg = MIMEText(fp.read(), 'html', 'utf-8')
     fp.close()
 
     # setup mail content
@@ -31,7 +31,7 @@ def send_report(smtp_server, sender, recipient, msg):
         smtp = SMTP(smtp_server)
         smtp.sendmail(sender, recipient, msg.as_string())
         smtp.quit()
-    except Exception, e:
+    except Exception as e:
         print("Error, failed to send report. " + str(e))
 
 
