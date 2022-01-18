@@ -1,9 +1,5 @@
 # Ubuntu Security Notices Report Generator
 
-[![Docker Stars](https://img.shields.io/docker/stars/guessi/usn-report.svg)](https://hub.docker.com/r/guessi/usn-report/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/guessi/usn-report.svg)](https://hub.docker.com/r/guessi/usn-report/)
-[![Docker Automated](https://img.shields.io/docker/automated/guessi/usn-report.svg)](https://hub.docker.com/r/guessi/usn-report/)
-
 Get latest security report from upstream [Ubuntu Security Notices](https://www.ubuntu.com/usn/)
 
 
