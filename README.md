@@ -12,7 +12,7 @@ Generate Report
 Send Report
 
     $ export SMTP_SERVER='msa.hinet.net'
-    $ export RECIPIENT='kuole_mei@trend.com.tw'
+    $ export RECIPIENT='user@example.com'
     $ ./report-send.py
 
 
@@ -27,7 +27,7 @@ Send out report
 
     $ docker run                               \
         -e SMTP_SERVER=msa.hinet.net           \
-        -e RECIPIENT=guessi@gmail.com          \
+        -e RECIPIENT=user@example.com          \
         -v $(pwd)/report.html:/opt/report.html \
         -it guessi/usn-report                  \
         /opt/report-send.py
